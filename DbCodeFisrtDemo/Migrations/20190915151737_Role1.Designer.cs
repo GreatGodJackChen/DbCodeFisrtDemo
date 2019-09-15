@@ -4,14 +4,16 @@ using DbCodeFisrtDemo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DbCodeFisrtDemo.Migrations
 {
     [DbContext(typeof(CodeFirstDbContext))]
-    partial class CodeFirstDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190915151737_Role1")]
+    partial class Role1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

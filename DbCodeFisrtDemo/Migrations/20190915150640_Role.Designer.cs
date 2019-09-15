@@ -4,14 +4,16 @@ using DbCodeFisrtDemo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DbCodeFisrtDemo.Migrations
 {
     [DbContext(typeof(CodeFirstDbContext))]
-    partial class CodeFirstDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190915150640_Role")]
+    partial class Role
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,9 +57,11 @@ namespace DbCodeFisrtDemo.Migrations
 
                     b.Property<int>("UserId");
 
+                    b.Property<int?>("UserPId");
+
                     b.HasKey("IdP");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserPId");
 
                     b.ToTable("Roles");
                 });
@@ -149,10 +153,9 @@ namespace DbCodeFisrtDemo.Migrations
 
             modelBuilder.Entity("DbCodeFisrtDemo.Models.Role", b =>
                 {
-                    b.HasOne("DbCodeFisrtDemo.Models.UserModel", "User")
+                    b.HasOne("DbCodeFisrtDemo.Models.UserModel", "UserP")
                         .WithMany("Roles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserPId");
                 });
 
             modelBuilder.Entity("DbCodeFisrtDemo.Models.Student", b =>

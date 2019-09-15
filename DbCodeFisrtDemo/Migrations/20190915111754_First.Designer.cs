@@ -4,14 +4,16 @@ using DbCodeFisrtDemo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DbCodeFisrtDemo.Migrations
 {
     [DbContext(typeof(CodeFirstDbContext))]
-    partial class CodeFirstDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190915111754_First")]
+    partial class First
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,23 +45,6 @@ namespace DbCodeFisrtDemo.Migrations
                     b.HasKey("GradeId");
 
                     b.ToTable("Grades");
-                });
-
-            modelBuilder.Entity("DbCodeFisrtDemo.Models.Role", b =>
-                {
-                    b.Property<int>("IdP")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("IdP");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("DbCodeFisrtDemo.Models.Student", b =>
@@ -115,9 +100,9 @@ namespace DbCodeFisrtDemo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CourseId");
+                    b.Property<int>("CourseId");
 
-                    b.Property<int?>("StudentId");
+                    b.Property<int>("StudentId");
 
                     b.HasKey("StudentCourseId");
 
@@ -147,14 +132,6 @@ namespace DbCodeFisrtDemo.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DbCodeFisrtDemo.Models.Role", b =>
-                {
-                    b.HasOne("DbCodeFisrtDemo.Models.UserModel", "User")
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("DbCodeFisrtDemo.Models.Student", b =>
                 {
                     b.HasOne("DbCodeFisrtDemo.Models.Grade", "Grade")
@@ -174,11 +151,13 @@ namespace DbCodeFisrtDemo.Migrations
                 {
                     b.HasOne("DbCodeFisrtDemo.Models.Course", "Course")
                         .WithMany("StudentCourses")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("DbCodeFisrtDemo.Models.Student", "Student")
                         .WithMany("StudentCourses")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

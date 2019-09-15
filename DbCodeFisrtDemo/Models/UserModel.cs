@@ -8,7 +8,20 @@ using System.Threading.Tasks;
 
 namespace DbCodeFisrtDemo.Models
 {
-    [Table("User")]
+    [Table("Roles")]
+    public class Role
+    {
+        [Key]
+        public  int IdP { get; set; }
+
+        public string Name { get; set; }
+
+        public int UserId { get; set; }
+
+        public virtual  UserModel User { get; set; }
+    }
+
+    [Table("Users")]
     public class UserModel
     {
         public int Id { get; set; }
@@ -18,6 +31,8 @@ namespace DbCodeFisrtDemo.Models
         public string Password { get; set; }
         [DefaultValue(18)]
         public int Age { get; set; }
+
+        public virtual List<Role> Roles { get; set; }
         //sqlserver中nvarchar(50)，对应EF中：
         //[MaxLength(50, ErrorMessage = "最大长度为{1}")]
 
