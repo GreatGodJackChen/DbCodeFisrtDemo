@@ -22,24 +22,31 @@ namespace DbCodeFisrtDemo.Controllers
 
         public IActionResult Index()
         {
-            //Eager Loading（预加载）使用Include方法关联预先加载的实体。在这里就不举例说明了。
-            //Explicit Loading（直接加载）使用Entry方法，对于集合使用Collection，单个实体则使用Reference。在这里就不举例说明了。
-            //新增
-            //_addData.Add();
-            //_addData.AddOneTable();
-
-            //一对多 做了延迟加载会自动加载子查询
-            //var grade1 = _dbContext.Grades.Where(g => g.GradeId == 1);
-            //var grade = _dbContext.Grades.Where(g => g.GradeId == 1).Where(g => g.Students.All(r => true)).ToList();
-            //var grade2 = _dbContext.Grades;
-            ////一对多 非延迟加载才用直接显示加载
-            //var grade3 = _dbContext.Grades.FirstOrDefault(g => g.GradeId == 1);
-            //if (grade3 != null)
-            //{
-            //    _dbContext.Entry(grade3).Collection(g => g.Students).Query().Load();
+            //using (var context = new EFCoreDBContext())
+            //{ 
+            //    var q= from a in context.User
+            //           join from b in context.
             //}
-            //多对多
-            var student = _dbContext.Students.Include(p => p.StudentCourses).ThenInclude(pt => pt.Course).ToList();
+                //var p= from o in _dbContext.User
+                //       join from b in _dbContext.
+                //Eager Loading（预加载）使用Include方法关联预先加载的实体。在这里就不举例说明了。
+                //Explicit Loading（直接加载）使用Entry方法，对于集合使用Collection，单个实体则使用Reference。在这里就不举例说明了。
+                //新增
+                //_addData.Add();
+                //_addData.AddOneTable();
+
+                //一对多 做了延迟加载会自动加载子查询
+                //var grade1 = _dbContext.Grades.Where(g => g.GradeId == 1);
+                //var grade = _dbContext.Grades.Where(g => g.GradeId == 1).Where(g => g.Students.All(r => true)).ToList();
+                //var grade2 = _dbContext.Grades;
+                ////一对多 非延迟加载才用直接显示加载
+                //var grade3 = _dbContext.Grades.FirstOrDefault(g => g.GradeId == 1);
+                //if (grade3 != null)
+                //{
+                //    _dbContext.Entry(grade3).Collection(g => g.Students).Query().Load();
+                //}
+                //多对多
+                var student = _dbContext.Students.Include(p => p.StudentCourses).ThenInclude(pt => pt.Course).ToList();
 
             //官方文档外键不为null 删除主从  外键为null 删除主表，从表外键为Null,测试结果为都是设置为见为null
             //所以先删除从后删除主表

@@ -23,6 +23,7 @@ namespace DbCodeFisrtDemo.Data
             : base(options)
         {
         }
+        //public DbSet<User> User { get; set; }
         public DbSet<UserModel> Users { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentAddress> StudentAddresss { get; set; }
